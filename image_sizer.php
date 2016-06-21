@@ -1,4 +1,11 @@
 <?php
+/** 
+* @package   Image_sizer
+* @author    Mohamed Elbahja <Mohamed@elbahja.me>
+* @copyright 2016 
+* @version   1.0
+* @license   LGPL <http://www.gnu.org/licenses/lgpl.txt>
+*/
 
 class image_sizer
 {
@@ -60,6 +67,7 @@ class image_sizer
 
 	}
 
+
 	/**
 	 * 
 	 * @param  string  $showType [image show type : png or jpg or gif]
@@ -70,6 +78,8 @@ class image_sizer
 	{
 
 		if (headers_sent($file, $line)) exit("Error : Headers sent in $file on line $line");
+
+		$quality = $this->getQuality($showType, $quality);
 
 		if($showType === 'jpeg' || $showType === 'jpg') {
 
@@ -96,19 +106,21 @@ class image_sizer
 	 * @param  string $pathName [ full path and file name ex : 'images_dir/image_name.png']
 	 * @return boolean
 	 */
-	public function saveTo($pathName)
+	public function saveTo($pathName, $quality = 100)
 	{
 		$type = end(explode('.', $pathName));
 
 		if(!is_writable(dirname($pathName))) return false;
 
+		$quality = $this->getQuality($type, $quality);
+
 		if($type === 'jpeg' || $type === 'jpg') {
 
-			return imagejpeg($this->getResizedImage(), $pathName);
+			return imagejpeg($this->getResizedImage(), $pathName, $quality);
 			
 		} elseif($type === 'png') {
 
-			return imagepng($this->getResizedImage(), $pathName);	
+			return imagepng($this->getResizedImage(), $pathName, $quality);	
 
 		} elseif($type === 'gif') {
 
@@ -118,6 +130,25 @@ class image_sizer
 		return false;
 	}
 
+	protected function getQuality($type, $quality)
+	{
+		if($type === 'png') {
+
+			if($quality <= 90) {
+
+				return $quality / 10;
+
+			} else {
+
+				return 9;
+			}
+
+		} elseif($type === 'jpeg' || $type === 'jpg') {
+
+			return $quality;
+		}
+
+	}
 
 	protected function getResizedImage()
 	{
