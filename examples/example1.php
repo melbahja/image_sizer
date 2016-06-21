@@ -27,4 +27,4 @@ $img->setSize(100, 60);
  * type : png, jpeg, jpg, gif
  * quality : image show quality 100 = 100%
  */
-$img->show('jpeg', 10);
+$img->show('png', 100);
