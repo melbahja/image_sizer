@@ -110,7 +110,7 @@ class image_sizer
 	{
 		$type = end(explode('.', $pathName));
 
-		if(!is_writable(dirname($pathName))) return false;
+		if(!is_writable(dirname($pathName))) exit('failed to open stream: Permission denied');
 
 		$quality = $this->getQuality($type, $quality);
 
