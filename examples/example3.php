@@ -1,7 +1,7 @@
 <?php
 
 
-require('image_sizer.php');
+require('../image_sizer.php');
 
 
 $img = new image_sizer();
