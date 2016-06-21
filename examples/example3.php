@@ -28,8 +28,9 @@ $img->setSize(100, 60);
  * saveTo
  * save image
  * $img->saveTo(full path and name, quality); 
+ * return boolean
  */
-$img->saveTo('new_image.png', 100); // save image png type
+var_dump($img->saveTo('new_image.png', 100)); // save image png type
 
 //$img->saveTo('new_image.jpg', 100); // save image jpg type
 //$img->saveTo('new_image.jpeg', 100); // save image jpg type
