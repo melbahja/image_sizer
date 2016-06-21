@@ -18,7 +18,7 @@ $img->setImage('php.png');
  * New image size
  * $img->setSize(Width, Height)
  */
-$img->setSize(100, 60);
+$img->setSize(200, 200);
 
 /**
  * show image
