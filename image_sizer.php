@@ -21,7 +21,8 @@ class image_sizer
 	public function setImage($imgfile)
 	{
 
-		$imgex = end(explode('.', $imgfile));
+		$imgex = explode('.', $imgfile);
+		$imgex = end($imgex);
 
 		if($imgex === 'png' || $imgex === 'jpg' || $imgex === 'jpeg' || $imgex === 'gif') {
 			
@@ -108,7 +109,8 @@ class image_sizer
 	 */
 	public function saveTo($pathName, $quality = 100)
 	{
-		$type = end(explode('.', $pathName));
+		$type = explode('.', $pathName);
+		$type = end($type);
 
 		if(!is_writable(dirname($pathName))) exit('failed to open stream: Permission denied');
 
